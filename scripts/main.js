@@ -30,10 +30,14 @@ $('#submit-train').on('click',function(){
     frequency = $('#new-frequency').val().trim();
     arrivalTime = $('#new-arrival-time').val().trim();
 
-    database.ref().set({
+    database.ref().push({
       trainName:trainName,
       destination:destination,
       arrivalTime:arrivalTime,
       frequency:frequency
     })
+  })
+
+  database.ref().on('child_added', function(snapshot){
+      console.log(snapshot);
   })
