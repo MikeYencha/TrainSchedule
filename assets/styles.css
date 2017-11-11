@@ -1,0 +1,12 @@
+body {
+    background-color: lightblue;
+}
+.blue-background {
+    background-color: #337ab7;
+}
+.text-white {
+    color: white !important;
+}
+.blue-fade {
+    background-color: rgba(173,216,230,.15);
+}

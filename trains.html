@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Train Scheduler</title>
+        <!-- jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Bootstrap CDN-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="./assets/styles.css">
+        <!-- Firebase Reference -->
+        <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+    </head>
+
+    <body>
+        <br>
+        <div class="container">
+        <!-- The Heading -->
+            <div class="jumbotron blue-background">
+                <h1 class="text-white text-center">Why is the Train Always late?</h1>
+                <h3 class="text-white text-center">This is why I drive a car, but maybe a schedule will help you...e-hem...'commuters'</h3>
+            </div>
+        <!-- First row to contain train schedule -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title text-center">Current Train schedule</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Train Name</th>
+                                            <th>Destination</th>
+                                            <th>Frequency (min.)</th>
+                                            <th>Next Arrival</th>
+                                            <th>Minutes Away</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="train-name">foo</td>
+                                            <td id="destination">foo</td>
+                                            <td id="frequency">foo</td>
+                                            <td id="arrival-time">foo</td>
+                                            <td id="minutes-away">bar</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- Second row to contain new train input -->
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title text-center">Current Train schedule</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="train-name">Train Name</label>
+                                    <input class="form-control blue-fade" id="new-train-name" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <label for="train-destination">Destination</label>
+                                    <input class="form-control blue-fade" id="new-destination" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <label for="arrival-time">First Train Time (show time example for formatting)</label>
+                                    <input class="form-control blue-fade" id="new-arrival-time" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <label for="train-frequency">Frequency (in minutes)</label>
+                                    <input class="form-control blue-fade" id="new-frequency" type="text">
+                                </div>
+                                <button class="btn btn-primary" id="submit-train" type="submit">Submit New Train Schedule</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+
+        </div>
+        <!-- local javascript file -->
+        <script type="text/javascript" src="./scripts/main.js"></script>
+    </body>
+</html>
