@@ -7,50 +7,45 @@ projectId: "my-train-scheduler-e13da",
 storageBucket: "",
 messagingSenderId: "35194440748"
 };
-
 firebase.initializeApp(config);
+//initial variables
 var database = firebase.database();
-
-// console.log(database);
-// console.log('foo');
-
-//variables for application
-var database = firebase.database();
-
 var trainName = '';
 var destination = '';
 var frequency = '';
 var arrivalTime = '';
 var minutesAway = '';
-
-
-//grab info from submit to store in database
+//collect data on click
 $('#submit-train').on('click',function(){
     trainName = $('#new-train-name').val().trim();
     destination = $('#new-destination').val().trim();
     frequency = $('#new-frequency').val().trim();
     arrivalTime = $('#new-arrival-time').val().trim();
-//push captured data to the database
+    //keep adding information to the database
     database.ref().push({
       trainName:trainName,
       destination:destination,
       arrivalTime:arrivalTime,
-      frequency:frequency
+      frequency:frequency,
+      dateAdded:firebase.database.ServerValue.TIMESTAMP
     })
-  })
-  
-  database.ref().on('child_added', function(snapshot){
-    //   console.log(snapshot);
-    var tn = snapshot.val().trainName;
-    var ds = snapshot.val().destination;
-    var fq = snapshot.val().frequency;
-    var at = snapshot.val().arrivalTime;
-    // $('#train-name').append(snapshot.val().trainName);
-    $('#train-row').html('<td>'+tn+'</td>'+'<td>'+ds+'</td>'+'<td>'+fq+'</td>'+'<td>'+at+'</td>');
-  })
-
-//   <td id="train-name">foo</td>
-//   <td id="destination">foo</td>
-//   <td id="frequency">foo</td>
-//   <td id="arrival-time">foo</td>
-//   <td id="minutes-away">bar</td>
+  });
+  //add subsequesnt entries by user to the bottom of the table
+  database.ref().orderByChild('dateAdded').limitToLast(1).on('value', function(snapshot) {
+    $('#train-body').html(
+        '<tr><td>'+snapshot.val().trainName
+        +'<td>'+snapshot.val().destination+'</td>'
+        +'<td>'+snapshot.val().frequency+'</td>'
+        +'<td>'+snapshot.val().arrivalTime+'</td>'
+        +'<td>'+snapshot.val().minutesAway+'</td>'
+      )
+  });
+  //create table row based on child-added feqturels
+  database.ref().on('child_added',function(snapshot){
+      var tableRow = '<tr><td>'+snapshot.val().trainName+'</td>'
+      +'<td>'+snapshot.val().destination+'</td>'
+      +'<td>'+snapshot.val().frequency+'</td>'
+      +'<td>'+snapshot.val().arrivalTime+'</td>'
+      +'<td>'+snapshot.val().minutesAway+'</td>';
+      $('#train-body').append(tableRow);
+  });
